@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style> 
+  #bg{width: 650px; height: 600px; margin: 0 auto; position: relative;}
+  img[src^="pointer"]{position: absolute; z-index: 10; top: 155px; left: 247px;}
+  img[src^="turntable"]{position: absolute; z-index: 5; top: 60px; left: 116px; transition: all 4s;}
+</style>
+
+<div id="bg">
+    <img src="pointer.png" alt="pointer">
+    <img src="turntable.png"  id="zd_img" alt="turntable">
+</div>
+<div class="cs">抽奖次数：<span id="cs">3</span></div>
+<script>
+    var zz = document.getElementsByTagName("img")[0];
+    var zd = document.getElementsByTagName("img")[1];
+    var cs = document.getElementById("cs");
+    var csn=2;
+    var cat=51.42;
+    var boo = true;
+    function deg(){
+        var rdm = 0;
+        var timer = null;
+        clearInterval(timer);
+        timer = setInterval(function(){
+            
+            if(Math.floor(rdm/360)<3){
+                rdm = Math.floor(Math.random()*3600);
+            }else{
+                zd.style.transform="rotate("+rdm+"deg)";
+                clearInterval(timer);
+                setTimeout(function(){
+                    boo=!boo;
+                    num=rdm%360;
+                    if(num<=cat*1){
+                        alert("4999元");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }else if(num<=cat*2){
+                        alert("条50元");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }else if(num<=cat*3){
+                        alert("10元");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }else if(num<=cat*4){
+                        alert("5元");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }else if(num<=cat*5){
+                         alert("免息服务");
+                         zd.style.transform="rotate(0deg)";
+                         zd.style.transition=("all","0s");
+                    }else if(num<=cat*6){
+                        alert("提交白金");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }else if(num<=cat*7){
+                        alert("未中奖");
+                        zd.style.transform="rotate(0deg)";
+                        zd.style.transition=("all","0s");
+                    }
+                },4000);
+                
+            }         
+        },30)
+        return rdm;
+        
+        
+    }
+
+    zz.onclick = function(){
+        zd.style.transition=("all","4s"); 
+        if(parseInt(cs.innerHTML)<=0){
+            alert("没有抽奖机会！")
+        }else{
+            cs.innerHTML=csn;
+            csn--;
+            deg(); 
+        }      
+    }
+</script>
+</body>
+</html>
